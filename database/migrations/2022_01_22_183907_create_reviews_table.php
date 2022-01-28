@@ -24,7 +24,7 @@ class CreateReviewsTable extends Migration
             $table->longText('file_second')->nullable();
             $table->longText('file_third')->nullable();
             $table->string('submit_comment');
-            $table->string('review_comment');
+            $table->string('review_comment')->nullable();
             $table->string('reviewed_at')->nullable();
             $table->timestamps();
         });

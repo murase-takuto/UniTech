@@ -21,4 +21,10 @@ class Task extends Model
     public function review() {
         return $this->hasMany(Review::class);
     }
+
+    public static function getTaskNumberByPrimaryKey($taskId) {
+        if (!$taskId) throw new BadRequestException();
+        $task = Task::find($taskId);
+        return $task->task_number;
+    }
 }

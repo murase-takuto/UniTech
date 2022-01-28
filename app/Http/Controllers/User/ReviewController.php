@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Consts\ReviewStatusConsts;
+use App\Consts\SlackChannelConsts;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use App\Models\Task;
+use App\Services\Slack\SlackFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Slack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ReviewController extends Controller
@@ -30,7 +33,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        $task = Task::where('task_number', Auth::user()->trying_task_number)->first();
+        $task = Task::find(Auth::user()->trying_task_id);
         return view('user.review.create', compact('task'));
     }
 
@@ -42,8 +45,8 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        Review::create([
-            'task_id' => Auth::user()->trying_task_number,
+        $review = Review::create([
+            'task_id' => Auth::user()->trying_task_id,
             'user_id' => Auth::id(),
             'status' => ReviewStatusConsts::REVIEWING,
             'url' => $request->url,
@@ -52,7 +55,17 @@ class ReviewController extends Controller
             'file_third' => $request->file_third,
             'submit_comment' => $request->submit_comment,
         ]);
-        return route('user.dashboard');
+        $taskNumber = Task::getTaskNumberByPrimaryKey(Auth::user()->trying_task_id);
+        $message = Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
+        $attatchment = [
+            'action' => [
+                'title' => 'コードを確認する',
+                'url' => url("/review/{$review->id}"),
+                'style' => ''
+            ]
+        ];
+        Slack::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
+        return redirect()->route('user.dashboard');
     }
 
     /**
