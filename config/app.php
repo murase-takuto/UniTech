@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia\Tokyo',
+    'timezone' => 'Asia/Tokyo',
 
     /*
     |--------------------------------------------------------------------------
@@ -123,6 +123,7 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'slack_url' => env('SLACK_URL'),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -175,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\SlackServiceProvider::class,
     ],
 
     /*
@@ -230,8 +232,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Slack' => App\Services\Slack\SlackFacade::class,
         // Consts
         'ReviewStatusConsts' => App\Consts\ReviewStatusConsts::class,
+        'SlackChannelConsts' => App\Consts\SlackChannelConsts::class,
 
     ],
 

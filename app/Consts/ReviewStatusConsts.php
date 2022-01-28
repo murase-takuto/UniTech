@@ -4,7 +4,6 @@ namespace App\Consts;
 
 class ReviewStatusConsts
 {
-    // キラメイジャーのメンバー
     public const REVIEWING = 1;
     public const REVIEWED = 2;
     public const REJECTED = 3;

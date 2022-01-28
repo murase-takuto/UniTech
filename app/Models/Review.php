@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class Review extends Model
 {
     use HasFactory;
+
     protected $dates = ['reviewed_at'];
 
     protected $fillable = [
@@ -20,7 +21,7 @@ class Review extends Model
         'file_first',
         'file_second',
         'file_third',
-        'submit_commment',
+        'submit_comment',
         'review_comment',
         'reviewed_at',
     ];
