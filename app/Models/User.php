@@ -44,9 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function updateToNextTask($userId) {
+    public static function updateToNextTask($userId) {
         if (!$userId) throw new BadRequestException('User_ID is Not Found.');
-        $user = $this->find($userId);
+        $user = User::find($userId);
         $currentTask = Task::find($user->trying_task_id);
         $nextTask = Task::where('task_number', $currentTask->task_number + 1)->first();
         // TODO: 最後の課題をクリアした場合($nextTaskが見つからない)に対応

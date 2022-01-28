@@ -10,7 +10,6 @@ use App\Models\Task;
 use App\Services\Slack\SlackFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Slack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ReviewController extends Controller
@@ -64,7 +63,9 @@ class ReviewController extends Controller
                 'style' => ''
             ]
         ];
-        Slack::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
+        SlackFacade::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
+        $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'が提出されました。';
+        SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
         return redirect()->route('user.dashboard');
     }
 
