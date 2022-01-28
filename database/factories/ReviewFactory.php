@@ -194,7 +194,7 @@ class ReviewFactory extends Factory
             ',
             'submit_comment' => $this->faker->sentence(),
             'review_comment' => $this->faker->sentence(),
-            'reviewed_at' => now(),
+            'reviewed_at' => null,
         ];
     }
 }

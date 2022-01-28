@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class Review extends Model
 {
     use HasFactory;
+    protected $dates = ['reviewed_at'];
 
     protected $fillable = [
         'task_id',
@@ -26,6 +27,14 @@ class Review extends Model
 
     public function task() {
         return $this->belongsTo(Task::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 
     public function getOwnReviews() {

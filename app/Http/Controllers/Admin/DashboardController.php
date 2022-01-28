@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Consts\ReviewStatusConsts;
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 class DashboardController extends Controller
 {
@@ -20,6 +23,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $reviewedTasks = Review::where('status', ReviewStatusConsts::REVIEWING)->paginate(10);
+        return view('admin.dashboard', compact('reviewedTasks'));
     }
 }
