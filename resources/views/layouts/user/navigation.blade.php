@@ -22,7 +22,7 @@
             </a>
             <ul class="">
                 <li>
-                    <a href="{{ route('user.task.show', Auth::user()->trying_task_number) }}" class="side-menu">
+                    <a href="{{ route('user.task.show', Auth::user()->trying_task_id) }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> 挑戦中の課題 </div>
                     </a>

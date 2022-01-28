@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/app-user.css') }}">
     <link rel="stylesheet" href="{{ asset('css/prism.css') }}">
 
     <!-- Scripts -->
-    <script src="{{ asset('dist/js/app.js') }}" defer></script>
+    <script src="{{ asset('dist/js/app-user.js') }}" defer></script>
     <script src="{{ asset('js/prism.js') }}" defer></script>
 </head>
 

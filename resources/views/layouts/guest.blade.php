@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/app-user.css') }}">
 
     <!-- Scripts -->
-    <script src="{{ asset('dist/js/app.js') }}" defer></script>
+    <script src="{{ asset('dist/js/app-user.js') }}" defer></script>
 </head>
 
 <body class="login">

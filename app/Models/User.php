@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class User extends Authenticatable
 {
@@ -21,7 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'trying_task_number'
+        'trying_task_id'
     ];
 
     /**
@@ -42,4 +43,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function updateToNextTask($userId) {
+        if (!$userId) throw new BadRequestException('User_ID is Not Found.');
+        $user = $this->find($userId);
+        $currentTask = Task::find($user->trying_task_id);
+        $nextTask = Task::where('task_number', $currentTask->task_number + 1)->first();
+        // TODO: 最後の課題をクリアした場合($nextTaskが見つからない)に対応
+        // if (!$nextTask) dd(1);
+        // 更新処理
+        $user->trying_task_id = $nextTask->id;
+        if (!$user->save()) return false;
+        return true;
+    }
 }
