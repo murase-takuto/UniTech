@@ -6,7 +6,7 @@
                 <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
                     <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
                         <img alt="Tinker Tailwind HTML Admin Template" class="rounded-full"
-                            src="dist/images/profile-6.jpg">
+                            src="{{ Auth::user()->avatar }}">
                         <div
                             class="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2">
                             <i class="w-4 h-4 text-white" data-feather="camera"></i>
