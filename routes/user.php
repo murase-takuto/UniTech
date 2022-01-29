@@ -32,6 +32,9 @@ Route::resource('task', TaskController::class);
 Route::resource('review', ReviewController::class);
 Route::resource('user', UserController::class);
 
+Route::get('/login/slack', [AuthenticatedSessionController::class, 'redirectToProvider']);
+Route::get('/login/slack/callback', [AuthenticatedSessionController::class, 'handleProviderCallback']);
+
 // Authentication
 Route::middleware('auth:users')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

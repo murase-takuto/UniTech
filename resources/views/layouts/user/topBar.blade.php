@@ -223,12 +223,12 @@
     <div class="intro-x dropdown w-8 h-8">
         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button"
             aria-expanded="false" data-tw-toggle="dropdown">
-            <img alt="Tinker Tailwind HTML Admin Template" src="{{ asset('dist/images/profile-7.jpg') }}">
+            <img alt="Tinker Tailwind HTML Admin Template" src="{{ Auth::user()->avatar }}">
         </div>
         <div class="dropdown-menu w-56">
             <ul class="dropdown-content bg-primary text-white">
                 <li class="p-2">
-                    <div class="font-medium">Kevin Spacey</div>
+                    <div class="font-medium">{{ Auth::user()->name }}</div>
                     <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Backend Engineer</div>
                 </li>
                 <li>
