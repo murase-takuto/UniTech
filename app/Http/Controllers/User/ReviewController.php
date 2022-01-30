@@ -15,18 +15,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ReviewController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 他のユーザーが提出したコード一覧を表示
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $reviews = Review::all();
+        $reviews = Review::paginate(20);;
         return view('user.review.index', compact('reviews'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 課題を提出
      *
      * @return \Illuminate\Http\Response
      */
@@ -37,7 +37,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 課題提出のDB保存処理
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -54,15 +54,15 @@ class ReviewController extends Controller
             'file_third' => $request->file_third,
             'submit_comment' => $request->submit_comment,
         ]);
-        $taskNumber = Task::getTaskNumberByPrimaryKey(Auth::user()->trying_task_id);
-        $message = Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
         $attatchment = [
             'action' => [
                 'title' => 'コードを確認する',
-                'url' => url("/review/{$review->id}"),
+                'url' => route("user.review.show", $review->id),
                 'style' => ''
             ]
         ];
+        $taskNumber = Task::getTaskNumberByPrimaryKey(Auth::user()->trying_task_id);
+        $message = Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
         SlackFacade::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
         $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'が提出されました。';
         SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
@@ -70,7 +70,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * レビュー詳細画面を表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -79,11 +79,12 @@ class ReviewController extends Controller
     {
         $review = Review::find($id);
         if (!$review) throw new NotFoundHttpException('Review Not Found.');
+        // TODO:自分の挑戦課題以上のレビューを閲覧しようとした場合にリダイレクト
         return view('user.review.show', compact('review'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * レビュー詳細画面を表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -106,7 +107,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * レビューを取り下げる（実装するか検討中）
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

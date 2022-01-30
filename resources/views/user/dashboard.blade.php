@@ -106,26 +106,22 @@
                                     </div>
                                     @switch($r->status)
                                         @case(ReviewStatusConsts::REVIEWING)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-primary text-white cursor-pointer font-medium">
+                                            <div class="py-1 px-2 rounded-full text-xs bg-primary text-white cursor-pointer font-medium">
                                                 {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                             </div>
                                         @break
                                         @case(ReviewStatusConsts::REJECTED)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
+                                            <div class="py-1 px-2 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
                                                 {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                             </div>
                                         @break
                                         @case(ReviewStatusConsts::PASSED)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                            <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
                                                 {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                             </div>
                                         @break
                                         @case(ReviewStatusConsts::REVERSED)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-dark text-white cursor-pointer font-medium">
+                                            <div class="py-1 px-2 rounded-full text-xs bg-dark text-white cursor-pointer font-medium">
                                                 {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                             </div>
                                         @break

@@ -4271,6 +4271,11 @@ textarea {
     background-color: rgb(var(--color-success)/var(--tw-bg-opacity))
 }
 
+.bg-dark {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--color-dark)/var(--tw-bg-opacity))
+}
+
 .bg-transparent {
     background-color: transparent
 }

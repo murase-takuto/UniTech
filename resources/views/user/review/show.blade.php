@@ -2,12 +2,12 @@
     <div class="col-span-12 pt-6">
         <div class="grid grid-cols-12 gap-6 mt-5 mb-5">
             <div class="intro-y col-span-12 lg:col-span-4">
-                <!-- BEGIN: Input -->
+                <!-- BEGIN: Task -->
                 <div class="intro-y box">
                     <div
                         class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
                         <h2 class="font-medium text-base mr-auto">
-                            Task{{ $review->task->task_number }}
+                            課題{{ $review->task->task_number }}
                         </h2>
                     </div>
                     <div id="input" class="p-5">
@@ -19,8 +19,6 @@
                             </div>
                             <div class="mt-3">
                                 <label for="regular-form-3" class="form-label">Content</label>
-                                {{-- <input id="regular-form-3" type="text" class="form-control" placeholder=""> --}}
-                                {{-- <div class="form-help">(ex) /home/www/yamada/hello.php</div> --}}
                                 <p>
                                     {!! $review->task->content !!}
                                 </p>
@@ -28,7 +26,55 @@
                         </div>
                     </div>
                 </div>
-                <!-- END: Input -->
+                <!-- END: Task -->
+                <!-- BEGIN: Comments -->
+                <div class="col-span-12 md:col-span-6 2xl:col-span-12 mt-3">
+                    <div class="intro-x flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">
+                            Comments
+                        </h2>
+                    </div>
+                    @if ($review->user_id != Auth::id())
+                        <div class="intro-y box">
+                            <div id="input" class="p-5">
+                                <div class="preview">
+                                    <form action="{{ route('user.comment.store') }}" method="POST">
+                                        @csrf
+                                        <div>
+                                            <label for="regular-form-1" class="form-label">Post a Comment</label>
+                                            <input type="hidden" value="{{ $review->id }}" name="review_id">
+                                            <textarea class="form-control" rows="5" name="comment"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-2 mr-2 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-activity w-4 h-4 mr-2 w-4 h-4 mr-2">
+                                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                            </svg>
+                                            コメントする
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    <div class="mt-5">
+                        @foreach ($review->comments as $c)
+                            <div class="intro-x relative flex items-center mb-3">
+                                <div class="box px-5 py-3 flex-1 zoom-in">
+                                    <div class="flex items-center">
+                                        <div class="font-medium">{{ $c->user->name }}</div>
+                                        <div class="text-xs text-slate-500 ml-auto">
+                                            {{ $c->created_at->format('m/d h:m') }}</div>
+                                    </div>
+                                    <div class="text-slate-500 mt-1">{{ $c->content }}</div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- END: Commentss -->
             </div>
             <div class="intro-y col-span-12 lg:col-span-8">
                 <!-- BEGIN: Input -->
@@ -38,13 +84,39 @@
                         <h2 class="font-medium text-base mr-auto">
                             Review
                         </h2>
+                        @switch($review->status)
+                            @case(ReviewStatusConsts::REVIEWING)
+                                <div
+                                    class="py-1 px-2 rounded-full text-xs bg-primary text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @case(ReviewStatusConsts::REJECTED)
+                                <div class="py-1 px-2 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @case(ReviewStatusConsts::PASSED)
+                                <div
+                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @case(ReviewStatusConsts::REVERSED)
+                                <div class="py-1 px-2 rounded-full text-xs bg-dark text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @default
+                        @endswitch
                     </div>
                     <div id="input" class="p-5">
                         <div class="preview">
                             <div>
                                 <label for="regular-form-1" class="form-label">URL</label>
                                 {{-- <input id="regular-form-1" type="text" class="form-control" placeholder="/home/www/yamada/hello.php"> --}}
-                                <a href="{{ $review->url }}" class="text-theme-25 block font-bold" target="_blank">{{ $review->url }}</a>
+                                <a href="{{ $review->url }}" class="text-theme-25 block font-bold"
+                                    target="_blank">{{ $review->url }}</a>
                             </div>
                             <div class="mt-3">
                                 <label for="regular-form-3" class="form-label">Full Path of File</label>
