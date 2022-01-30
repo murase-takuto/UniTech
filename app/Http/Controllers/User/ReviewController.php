@@ -62,7 +62,7 @@ class ReviewController extends Controller
             ]
         ];
         $taskNumber = Task::getTaskNumberByPrimaryKey(Auth::user()->trying_task_id);
-        $message = Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
+        $message = "<@" . Auth::user()->slack_id . ">" . PHP_EOL . Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
         SlackFacade::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
         $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'が提出されました。';
         SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
