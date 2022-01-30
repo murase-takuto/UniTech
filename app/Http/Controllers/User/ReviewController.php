@@ -55,7 +55,7 @@ class ReviewController extends Controller
             'submit_comment' => $request->submit_comment,
         ]);
         $taskNumber = Task::getTaskNumberByPrimaryKey(Auth::user()->trying_task_id);
-        $message = Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
+        $message = "<@" . Auth::user()->slack_id . ">" . PHP_EOL . Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
         $attatchment = [
             'action' => [
                 'title' => 'コードを確認する',

@@ -85,9 +85,8 @@ class ReviewController extends Controller
         $review->status = $request->review_status;
         $review->review_comment = $request->review_comment;
         $review->save();
-        // 合格の倍には次の課題に進める
-        if ($request->review_status == ReviewStatusConsts::PASSED) User::updateToNextTask($review->user_id);
-        $message = $review->user->name . 'さんの課題' . $review->task->task_number . 'がレビューされました。';
+        // 合格の場合には次の課題に進める
+        if ($request->status == ReviewStatusConsts::PASSED) User::updateToNextTask($review->user_id);
         $attatchment = [
             'action' => [
                 'title' => 'レビューを確認する',
@@ -95,6 +94,7 @@ class ReviewController extends Controller
                 'style' => ''
             ]
         ];
+        $message = "<@" . $review->user->slack_id . ">" . PHP_EOL . $review->user->name . "さんの課題" . $review->task->task_number . "がレビューされました。";
         SlackFacade::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
         $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'のレビューが完了しました。';
         SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
