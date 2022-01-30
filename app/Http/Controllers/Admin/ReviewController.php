@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ReviewController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * レビュー一覧画面生成
      *
      * @return \Illuminate\Http\Response
      */
@@ -46,7 +46,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * レビュー詳細を表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -59,7 +59,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 編集画面表示(新規レビューもこのメソッドで実行)
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,7 +72,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * レビュー更新処理(新規レビューもこのメソッドで実行)
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

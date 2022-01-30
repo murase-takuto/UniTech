@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('user.task.index') }}" class="side-menu">
+                    <a href="{{ route('user.review.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> みんなのコード </div>
                     </a>

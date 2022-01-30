@@ -23,7 +23,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $reviewedTasks = Review::where('status', ReviewStatusConsts::REVIEWING)->paginate(10);
+        $reviewedTasks = Review::where('status', ReviewStatusConsts::REVIEWING)->paginate(15);
         return view('admin.dashboard', compact('reviewedTasks'));
     }
 }

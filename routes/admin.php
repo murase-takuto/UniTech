@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\TaskController;
@@ -21,6 +22,7 @@ Route::get('/', function () {
 Route::resource('task', TaskController::class);
 Route::resource('review', ReviewController::class);
 Route::resource('user', UserController::class);
+Route::resource('comment', CommentController::class);
 
 // Authentication
 Route::middleware('auth:admins')->group(function () {
