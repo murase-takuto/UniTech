@@ -90,12 +90,19 @@ class ReviewController extends Controller
         $attatchment = [
             'action' => [
                 'title' => 'レビューを確認する',
-                'url' => url("/review/{$review->id}"),
+                'url' => route("user.review.show", $review->id),
                 'style' => ''
             ]
         ];
         $message = "<@" . $review->user->slack_id . ">" . PHP_EOL . $review->user->name . "さんの課題" . $review->task->task_number . "がレビューされました。";
         SlackFacade::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
+        $attatchment = [
+            'action' => [
+                'title' => 'レビューを確認する',
+                'url' => route("admin.review.show", $review->id),
+                'style' => ''
+            ]
+        ];
         $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'のレビューが完了しました。';
         SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
         return redirect()->route('admin.dashboard');
