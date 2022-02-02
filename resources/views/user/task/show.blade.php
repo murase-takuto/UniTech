@@ -30,11 +30,12 @@
                             </div>
                             <div class="mt-3">
                                 <a href="{{ route('user.review.create') }}" class="btn btn-primary w-32 mr-2 mb-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-activity w-4 h-4 mr-2 w-4 h-4 mr-2">
-                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-send block mr-2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                                     </svg>
                                     提出する
                                 </a>

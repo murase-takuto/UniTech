@@ -54,6 +54,7 @@ class ReviewController extends Controller
             'file_third' => $request->file_third,
             'submit_comment' => $request->submit_comment,
         ]);
+        $taskNumber = Task::getTaskNumberByPrimaryKey(Auth::user()->trying_task_id);
         $attatchment = [
             'action' => [
                 'title' => 'コードを確認する',
@@ -61,9 +62,15 @@ class ReviewController extends Controller
                 'style' => ''
             ]
         ];
-        $taskNumber = Task::getTaskNumberByPrimaryKey(Auth::user()->trying_task_id);
         $message = "<@" . Auth::user()->slack_id . ">" . PHP_EOL . Auth::user()->name . 'さんが課題' . $taskNumber . 'を提出しました。';
         SlackFacade::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
+        $attatchment = [
+            'action' => [
+                'title' => 'レビューする',
+                'url' => route("admin.review.show", $review->id),
+                'style' => ''
+            ]
+        ];
         $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'が提出されました。';
         SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
         return redirect()->route('user.dashboard');
