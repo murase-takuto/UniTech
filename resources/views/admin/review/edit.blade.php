@@ -59,6 +59,31 @@
                         <h2 class="font-medium text-base mr-auto">
                             Review
                         </h2>
+                        @switch($review->status)
+                            @case(ReviewStatusConsts::REVIEWING)
+                                <div
+                                    class="py-1 px-2 rounded-full text-xs bg-primary text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @case(ReviewStatusConsts::REJECTED)
+                                <div class="py-1 px-2 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @case(ReviewStatusConsts::PASSED)
+                                <div
+                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @case(ReviewStatusConsts::REVERSED)
+                                <div class="py-1 px-2 rounded-full text-xs bg-dark text-white cursor-pointer font-medium">
+                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$review->status]['title'] }}
+                                </div>
+                            @break
+                            @default
+                        @endswitch
                     </div>
                     <div id="input" class="p-5">
                         <div class="preview">
