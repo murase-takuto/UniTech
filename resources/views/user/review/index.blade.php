@@ -84,22 +84,22 @@
                                         <div class="flex">
                                             @switch($r->status)
                                                 @case(ReviewStatusConsts::REVIEWING)
-                                                    <div class="py-1 px-2 rounded-full text-xs bg-primary text-white cursor-pointer font-medium">
+                                                    <div class="py-1 px-2 rounded-full text-xs bg-primary text-white font-medium">
                                                         {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                                     </div>
                                                 @break
                                                 @case(ReviewStatusConsts::REJECTED)
-                                                    <div class="py-1 px-2 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
+                                                    <div class="py-1 px-2 rounded-full text-xs bg-danger text-white font-medium">
                                                         {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                                     </div>
                                                 @break
                                                 @case(ReviewStatusConsts::PASSED)
-                                                    <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                                    <div class="py-1 px-2 rounded-full text-xs bg-success text-white font-medium">
                                                         {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                                     </div>
                                                 @break
                                                 @case(ReviewStatusConsts::REVERSED)
-                                                    <div class="py-1 px-2 rounded-full text-xs bg-dark text-white cursor-pointer font-medium">
+                                                    <div class="py-1 px-2 rounded-full text-xs bg-dark text-white font-medium">
                                                         {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
                                                     </div>
                                                 @break
@@ -126,78 +126,4 @@
             <!-- END: Weekly Top Products -->
         </div>
     </div>
-    {{-- <div class="col-span-12 lg:col-span-9 2xl:col-span-10">
-        <!-- BEGIN: Directory & Files -->
-        <div class="intro-y grid grid-cols-12 gap-3 sm:gap-6 mt-5">
-            @for ($i = 0; $i < 30; $i++)
-                <div class="intro-y col-span-6 sm:col-span-4 md:col-span-3 2xl:col-span-2">
-                    <div class="file box rounded-md px-5 pt-8 pb-5 px-3 sm:px-5 relative zoom-in">
-                        <div class="absolute left-0 top-0 mt-3 ml-3">
-                            <input class="form-check-input border border-slate-500" type="checkbox">
-                        </div>
-                        <a href="" class="w-3/5 file__icon file__icon--image mx-auto">
-                            <div class="file__icon--image__preview image-fit">
-                                <img alt="Tinker Tailwind HTML Admin Template" src="dist/images/preview-9.jpg">
-                            </div>
-                        </a>
-                        <a href="" class="block font-medium mt-4 text-center truncate">preview-9.jpg</a>
-                        <div class="text-slate-500 text-xs text-center mt-0.5">1 MB</div>
-                        <div class="absolute top-0 right-0 mr-2 mt-3 dropdown ml-auto">
-                            <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"
-                                data-tw-toggle="dropdown"> <i data-feather="more-vertical"
-                                    class="w-5 h-5 text-slate-500"></i> </a>
-                            <div class="dropdown-menu w-40">
-                                <ul class="dropdown-content">
-                                    <li>
-                                        <a href="" class="dropdown-item"> <i data-feather="users"
-                                                class="w-4 h-4 mr-2"></i> Share File </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="dropdown-item"> <i data-feather="trash"
-                                                class="w-4 h-4 mr-2"></i> Delete </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endfor
-        </div>
-        <!-- END: Directory & Files -->
-        <!-- BEGIN: Pagination -->
-        <div class="intro-y flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-6">
-            <nav class="w-full sm:w-auto sm:mr-auto">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-feather="chevrons-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-feather="chevron-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                    <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4"
-                                data-feather="chevron-right"></i> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4"
-                                data-feather="chevrons-right"></i> </a>
-                    </li>
-                </ul>
-            </nav>
-            <select class="w-20 form-select box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
-        </div>
-        <!-- END: Pagination -->
-    </div> --}}
 </x-app-layout>

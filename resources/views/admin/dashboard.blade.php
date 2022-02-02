@@ -52,14 +52,6 @@
                     <h2 class="text-lg font-medium truncate mr-5">
                         Unreviewed List
                     </h2>
-                    <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                        <button class="btn box flex items-center text-slate-600 dark:text-slate-300"> <i
-                                data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to Excel
-                        </button>
-                        <button class="ml-3 btn box flex items-center text-slate-600 dark:text-slate-300"> <i
-                                data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to PDF
-                        </button>
-                    </div>
                 </div>
                 <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
                     <table class="table table-report sm:mt-2">
