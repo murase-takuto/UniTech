@@ -27,6 +27,7 @@ class CreateReviewsTable extends Migration
             $table->longText('review_comment')->nullable();
             $table->string('reviewed_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

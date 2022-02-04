@@ -21,6 +21,7 @@ class CreateTasksTable extends Migration
             $table->string('attention');
             $table->string('admin_check_memo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -15,7 +15,7 @@ class TaskFactory extends Factory
     {
         return [
             'task_number' => $this->faker->unique()->numberBetween(1, 30),
-            'title' => 'ユーザー側の商品一覧画面を作成しよう。',
+            'title' => $this->faker->realText(30),
             'content' => '管理側の商品一覧・詳細・追加・編集画面を作成しましょう。
 
             [仕様]
@@ -32,8 +32,8 @@ class TaskFactory extends Factory
             管理者用商品コントローラー
             管理者用商品一覧のビュー
             の3ファイルを提出してください。',
-            'attention' => $this->faker->sentence(),
-            'admin_check_memo' => $this->faker->sentence(),
+            'attention' => $this->faker->realText(),
+            'admin_check_memo' => $this->faker->realText(),
         ];
     }
 }
