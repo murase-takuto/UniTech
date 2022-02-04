@@ -254,9 +254,9 @@
                     <hr class="dropdown-divider border-white/[0.08]">
                 </li>
                 <li>
-                    <form method="POST" action="{{ route('user.logout') }}">
+                    <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf
-                        <a href="{{ route('user.logout') }}" class="dropdown-item hover:bg-white/5" onclick="event.preventDefault();
+                        <a href="{{ route('admin.logout') }}" class="dropdown-item hover:bg-white/5" onclick="event.preventDefault();
                                                         this.closest('form').submit();">
                             <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i>
                             {{ __('Sign Out') }}
