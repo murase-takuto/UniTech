@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('trying_task_id')->default(1);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

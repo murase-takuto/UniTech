@@ -142,45 +142,57 @@
                     </h2>
                 </div>
                 <div class="mt-5">
-                    @foreach ($reviewedTasks as $r)
-                        <div class="intro-y">
-                            <a href="{{ route('user.review.show', $r->id) }}">
-                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <div class="ml-4 mr-auto">
-                                        <div class="text-slate-500 text-xs">課題{{ $r->task->task_number }}</div>
-                                        <div class="font-medium mt-0.5">{{ $r->task->title }}</div>
+                    @if ($reviewedTasks->isNotEmpty())
+                        @foreach ($reviewedTasks as $r)
+                            <div class="intro-y">
+                                <a href="{{ route('user.review.show', $r->id) }}">
+                                    <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                        <div class="ml-4 mr-auto">
+                                            <div class="text-slate-500 text-xs">課題{{ $r->task->task_number }}</div>
+                                            <div class="font-medium mt-0.5">{{ $r->task->title }}</div>
+                                        </div>
+                                        @switch($r->status)
+                                            @case(ReviewStatusConsts::REVIEWING)
+                                                <div
+                                                    class="py-1 px-2 rounded-full text-xs bg-primary text-white cursor-pointer font-medium">
+                                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
+                                                </div>
+                                            @break
+                                            @case(ReviewStatusConsts::REJECTED)
+                                                <div
+                                                    class="py-1 px-2 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
+                                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
+                                                </div>
+                                            @break
+                                            @case(ReviewStatusConsts::PASSED)
+                                                <div
+                                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
+                                                </div>
+                                            @break
+                                            @case(ReviewStatusConsts::REVERSED)
+                                                <div
+                                                    class="py-1 px-2 rounded-full text-xs bg-dark text-white cursor-pointer font-medium">
+                                                    {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
+                                                </div>
+                                            @break
+                                            @default
+                                        @endswitch
                                     </div>
-                                    @switch($r->status)
-                                        @case(ReviewStatusConsts::REVIEWING)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-primary text-white cursor-pointer font-medium">
-                                                {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
-                                            </div>
-                                        @break
-                                        @case(ReviewStatusConsts::REJECTED)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
-                                                {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
-                                            </div>
-                                        @break
-                                        @case(ReviewStatusConsts::PASSED)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                                {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
-                                            </div>
-                                        @break
-                                        @case(ReviewStatusConsts::REVERSED)
-                                            <div
-                                                class="py-1 px-2 rounded-full text-xs bg-dark text-white cursor-pointer font-medium">
-                                                {{ ReviewStatusConsts::REVIEW_STATUS_LIST[$r->status]['title'] }}
-                                            </div>
-                                        @break
-                                        @default
-                                    @endswitch
+                                </a>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="intro-y">
+                            <div class="box px-4 py-4 mb-3 flex items-center">
+                                <div class="ml-4 mr-auto">
+                                    <div class="text-xs">
+                                        まだ提出した課題がありません。
+                                    </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                    @endforeach
+                    @endif
                 </div>
             </div>
             <!-- END: Reviewed Tasks -->
