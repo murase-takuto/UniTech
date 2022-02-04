@@ -19,10 +19,10 @@ Route::get('/', function () {
     return view('user.welcome');
 })->name('welcome');
 
-Route::resource('task', TaskController::class);
-Route::resource('review', ReviewController::class);
-Route::resource('user', UserController::class);
-Route::resource('comment', CommentController::class);
+Route::resource('task', TaskController::class)->middleware('auth');
+Route::resource('review', ReviewController::class)->middleware('auth');
+Route::resource('user', UserController::class)->middleware('auth');
+Route::resource('comment', CommentController::class)->middleware('auth');
 
 Route::get('/login/slack', [AuthenticatedSessionController::class, 'redirectToProvider']);
 Route::get('/login/slack/callback', [AuthenticatedSessionController::class, 'handleProviderCallback']);
