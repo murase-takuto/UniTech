@@ -51,7 +51,8 @@ class TaskController extends Controller
     public function show($id)
     {
         $task = Task::find($id);
-        if (!$task) throw new NotFound('Task Not Found.');
+        if (!$task) abort(404, 'Task Not Found.');
+        if ($task->task_number > Auth::user()->task->task_number) return redirect()->route('user.dashboard')->with('flash_failed', '合格していない課題は閲覧できません。');
         return view('user.task.show', compact('task'));
     }
 

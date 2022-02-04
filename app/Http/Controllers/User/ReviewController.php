@@ -21,7 +21,9 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::paginate(20);;
+        // TODO: 全レビューを取得する際に自分がクリアした課題のみにするかどうか仕様決定
+        // TODO: 全権取得しておいてView側でリンクを表示させないようにするのもアリ
+        $reviews = Review::paginate(20);
         return view('user.review.index', compact('reviews'));
     }
 
@@ -73,7 +75,7 @@ class ReviewController extends Controller
         ];
         $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'が提出されました。';
         SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
-        return redirect()->route('user.dashboard');
+        return redirect()->route('user.dashboard')->with('flash_success', 'コードを提出しました。');
     }
 
     /**
@@ -85,13 +87,12 @@ class ReviewController extends Controller
     public function show($id)
     {
         $review = Review::find($id);
-        if (!$review) throw new NotFoundHttpException('Review Not Found.');
-        // TODO:自分の挑戦課題以上のレビューを閲覧しようとした場合にリダイレクト
+        if (!$review) abort(404, 'Not Found');
+        if ($review->task->task_number > Auth::user()->task->task_number) return redirect()->route('user.dashboard')->with('flash_failed', '合格していない課題のコードは閲覧できません。');
         return view('user.review.show', compact('review'));
     }
 
     /**
-     * レビュー詳細画面を表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
