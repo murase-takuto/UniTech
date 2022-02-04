@@ -58,4 +58,8 @@ class User extends Authenticatable
         if (!$user->save()) return false;
         return true;
     }
+
+    public function task() {
+        return $this->hasOne(Task::class, 'id', 'trying_task_id');
+    }
 }

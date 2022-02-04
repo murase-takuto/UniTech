@@ -105,7 +105,7 @@ class ReviewController extends Controller
         ];
         $message = "<!channel>" . PHP_EOL . $review->user->name . 'さんの課題' . $review->task->task_number . 'のレビューが完了しました。';
         SlackFacade::send(SlackChannelConsts::ADMIN_REVIEW_NOTIFICATION, $message, $attatchment);
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('flash_success', 'レビューが完了しました。');
     }
 
     /**

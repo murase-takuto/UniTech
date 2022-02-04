@@ -27,21 +27,42 @@
         <!-- BEGIN: Content -->
         <div class="content">
             @include('layouts.user.topBar')
+            @if (session('flash_success'))
+                <div class="mt-6 intro-y">
+                    <div class="alert alert-success alert-dismissible show text-white flex items-center" role="alert">
+                        <span>
+                            {{ session('flash_success') }}
+                        </span>
+                        <button type="button" class="btn-close text-white" data-bs-dismiss="alert" aria-label="Close"> <i
+                                data-feather="x" class="w-4 h-4"></i> </button>
+                    </div>
+                </div>
+            @endif
+            @if (session('flash_failed'))
+                <div class="mt-6 intro-y">
+                    <div class="alert alert-danger alert-dismissible show text-white flex items-center" role="alert">
+                        <span>
+                            {{ session('flash_failed') }}
+                        </span>
+                        <button type="button" class="btn-close text-white" data-bs-dismiss="alert" aria-label="Close"> <i
+                                data-feather="x" class="w-4 h-4"></i> </button>
+                    </div>
+                </div>
+            @endif
             <div class="report-box-3 report-box-3--content grid grid-cols-12 gap-6 z-40 2xl:z-10">
-            {{-- <div class="report-box-3 report-box-3--content grid grid-cols-12 gap-6 xl:-mt-5 2xl:-mt-8 -mb-10 z-40 2xl:z-10"> --}}
                 {{ $slot }}
             </div>
         </div>
         <!-- END: Content -->
     </div>
 
-    <!-- BEGIN: Dark Mode Switcher-->
+    {{-- <!-- BEGIN: Dark Mode Switcher-->
     <div data-url="side-menu-dark-dashboard-overview-1.html"
         class="dark-mode-switcher cursor-pointer shadow-md fixed bottom-0 right-0 box dark:bg-dark-2 border rounded-full w-40 h-12 flex items-center justify-center z-50 mb-10 mr-10">
         <div class="mr-4 text-gray-700 dark:text-gray-300">Dark Mode</div>
         <div class="dark-mode-switcher__toggle border"></div>
     </div>
-    <!-- END: Dark Mode Switcher-->
+    <!-- END: Dark Mode Switcher--> --}}
 </body>
 
 </html>

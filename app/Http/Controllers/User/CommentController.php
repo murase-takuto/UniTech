@@ -55,7 +55,7 @@ class CommentController extends Controller
         $taskNumber = Task::getTaskNumberByPrimaryKey($comment->user->trying_task_id);
         $message = "<@" . $comment->review->user->slack_id . ">" . PHP_EOL . $comment->review->user->name . 'さんが提出した課題' . $taskNumber . 'に' . Auth::user()->name . 'さんがコメントしました。';
         SlackFacade::send(SlackChannelConsts::USER_REVIEW_NOTIFICATION, $message, $attatchment);
-        return redirect()->route('user.review.show', $request->review_id);
+        return redirect()->route('user.review.show', $request->review_id)->with('flash_success', 'コメントを送信しました。');
     }
 
     /**
