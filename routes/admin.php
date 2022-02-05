@@ -19,14 +19,14 @@ Route::get('/', function () {
     return view('admin.welcome');
 })->name('welcome');
 
-Route::resource('task', TaskController::class);
-Route::resource('review', ReviewController::class);
-Route::resource('user', UserController::class);
-Route::resource('comment', CommentController::class);
 
 // Authentication
 Route::middleware('auth:admins')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('task', TaskController::class);
+    Route::resource('review', ReviewController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('comment', CommentController::class);
 });
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
