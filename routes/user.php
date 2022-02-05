@@ -19,17 +19,15 @@ Route::get('/', function () {
     return view('user.welcome');
 })->name('welcome');
 
-Route::resource('task', TaskController::class)->middleware('auth');
-Route::resource('review', ReviewController::class)->middleware('auth');
-Route::resource('user', UserController::class)->middleware('auth');
-Route::resource('comment', CommentController::class)->middleware('auth');
-
 Route::get('/login/slack', [AuthenticatedSessionController::class, 'redirectToProvider']);
 Route::get('/login/slack/callback', [AuthenticatedSessionController::class, 'handleProviderCallback']);
 
-// Authentication
 Route::middleware('auth:users')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('review', ReviewController::class)->middleware('auth');
+    Route::resource('task', TaskController::class)->middleware('auth');
+    Route::resource('user', UserController::class)->middleware('auth');
+    Route::resource('comment', CommentController::class)->middleware('auth');
 });
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
