@@ -25,7 +25,9 @@ class User extends Authenticatable
         'avatar',
         'slack_id',
         'password',
-        'trying_task_id'
+        'trying_task_id',
+        'dir_name',
+        'server_password',
     ];
 
     /**

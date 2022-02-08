@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -26,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.create');
     }
 
     /**
@@ -37,7 +38,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::where('email', $request->email)->first();
+        if ($user) return redirect()->back()->with('flash_failed', 'このメールアドレスのユーザはすでに登録済みです。');
+        $user = User::where('dir_name', $request->dir_name)->first();
+        if ($user) return redirect()->back()->with('flash_failed', 'このディレクトリ名は使用済みです。');
+
+        // TODO: ディレクトリ生成処理？
+
+        if ($request->slack_invitation) dd(1); // Slackチャンネル招待送信
+
+        User::create([
+            'name'  => $request->username,
+            'email' => $request->email,
+            'dir_name' => $request->dir_name,
+            'server_password' => Str::random(8),
+        ]);
+        return redirect()->route('admin.user.create')->with('flash_success', 'ユーザーを登録しました。');
     }
 
     /**

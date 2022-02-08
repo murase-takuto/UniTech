@@ -7,10 +7,6 @@
                     <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
                         <img alt="Tinker Tailwind HTML Admin Template" class="rounded-full"
                             src="{{ Auth::user()->avatar }}">
-                        <div
-                            class="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2">
-                            <i class="w-4 h-4 text-white" data-feather="camera"></i>
-                        </div>
                     </div>
                     <div class="ml-5">
                         <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">
@@ -54,84 +50,6 @@
         </div>
     </div>
     <!-- END: Profile Info -->
-    <!-- BEGIN: News -->
-    <div class="col-span-12">
-        <div class="2xl:border-l -mb-10 pb-10">
-            <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-12 md:col-span-6 xl:col-span-6 mt-3 2xl:mt-6">
-                    <div class="intro-x flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-auto">
-                            News
-                        </h2>
-                        <button data-carousel="important-notes" data-target="prev"
-                            class="tiny-slider-navigator btn px-2 border-slate-300 text-slate-600 dark:text-slate-300 mr-2">
-                            <i data-feather="chevron-left" class="w-4 h-4"></i>
-                        </button>
-                        <button data-carousel="important-notes" data-target="next"
-                            class="tiny-slider-navigator btn px-2 border-slate-300 text-slate-600 dark:text-slate-300 mr-2">
-                            <i data-feather="chevron-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                    <div class="mt-5 intro-x">
-                        <div class="box zoom-in">
-                            <div class="tiny-slider" id="important-notes">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <div class="p-5">
-                                        <div class="text-base font-medium truncate">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="text-slate-400 mt-1">20 Hours ago</div>
-                                        <div class="text-slate-500 text-justify mt-1">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s.
-                                        </div>
-                                        <div class="font-medium flex mt-5">
-                                            <button type="button" class="btn btn-secondary py-1 px-2">
-                                                View Details
-                                            </button>
-                                        </div>
-                                    </div>
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-span-12 md:col-span-6 xl:col-span-6 mt-3 2xl:mt-6">
-                    <div class="intro-x flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-auto">
-                            News
-                        </h2>
-                    </div>
-                    <div class="mt-5 intro-x">
-                        <div class="box zoom-in">
-                            <div class="tiny-slider" id="important-notes">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <div class="p-5">
-                                        <div class="text-base font-medium truncate">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="text-slate-400 mt-1">20 Hours ago</div>
-                                        <div class="text-slate-500 text-justify mt-1">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s.
-                                        </div>
-                                        <div class="font-medium flex mt-5">
-                                            <button type="button" class="btn btn-secondary py-1 px-2">
-                                                View Details
-                                            </button>
-                                        </div>
-                                    </div>
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END: News -->
     <div class="col-span-12">
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Reviewed Tasks -->

@@ -74,18 +74,15 @@ class AuthenticatedSessionController extends Controller
 
         if (is_null($user->email)) throw new Exception("Slackアカウントからメールアドレスを取得できませんでした。");
 
-        $user = User::updateOrCreate([
-            'email' => $email
-        ], [
-            'slack_id' => $id,
-            'email'    => $email,
-            'name'     => $name,
-            'avatar'   => $avatar,
-            'password' => Hash::make(Str::random())
-        ]);
-        auth()->login($user);
-        session()->flash('ログインしました。');
+        $user = User::where('email', $email)->first();
+        if (!$user) throw new Exception('メールアドレスが不適切です。お困りの場合には運営までお問い合わせください。');
 
-        return redirect()->route('user.dashboard');
+        $user->slack_id = $id;
+        $user->avatar = $avatar;
+        $user->password = Hash::make(Str::random());
+        $user->save();
+
+        auth()->login($user);
+        return redirect()->route('user.dashboard')->with('flash_success', 'ログインしました。');
     }
 }

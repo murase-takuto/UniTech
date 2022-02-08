@@ -56,6 +56,12 @@
                         <div class="side-menu__title"> メンバー検索 </div>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.user.create') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                        <div class="side-menu__title"> 会員登録 </div>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class="side-nav__devider my-6"></li>
