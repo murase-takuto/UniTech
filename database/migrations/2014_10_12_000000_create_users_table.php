@@ -21,7 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('slack_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('trying_task_id')->default(1);
+            $table->integer('trying_task_id')->default(1);
+            $table->string('dir_name')->default('default');
+            $table->string('server_password')->defailt('default');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
