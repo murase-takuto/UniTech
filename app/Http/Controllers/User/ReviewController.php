@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Review;
 use App\Models\Task;
 use App\Services\Slack\SlackFacade;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,12 +29,18 @@ class ReviewController extends Controller
     }
 
     /**
-     * 課題を提出
+     * 課題提出画面の表示
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        $reviewing = Review::where([
+            'user_id' => Auth::id(),
+            'task_id' => Auth::user()->trying_task_id,
+            'status'  => ReviewStatusConsts::REVIEWING,
+        ])->first();
+        if ($reviewing) throw new Exception('課題がレビュー待ちの間は新しく提出することができません。');
         $task = Task::find(Auth::user()->trying_task_id);
         return view('user.review.create', compact('task'));
     }
@@ -46,6 +53,13 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $reviewing = Review::where([
+            'user_id' => Auth::id(),
+            'task_id' => Auth::user()->trying_task_id,
+            'status'  => ReviewStatusConsts::REVIEWING,
+        ])->first();
+        if ($reviewing) throw new Exception('課題がレビュー待ちの間は新しく提出することができません。');
+
         $review = Review::create([
             'task_id' => Auth::user()->trying_task_id,
             'user_id' => Auth::id(),
